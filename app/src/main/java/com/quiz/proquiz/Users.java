@@ -1,7 +1,11 @@
 package com.quiz.proquiz;
 
 public class Users {
-     String userName,gmail,password,mobile;
+     String userName;
+    String gmail;
+    String password;
+    String mobile;
+    String profilepic;
      long coins = 100;
 
     public Users(){
@@ -53,5 +57,14 @@ public class Users {
 
     public void setCoins(long coins) {
         this.coins = coins;
+    }
+
+
+    public String getProfilepic() {
+        return profilepic;
+    }
+
+    public void setProfilepic(String profilepic) {
+        this.profilepic = profilepic;
     }
 }

@@ -19,11 +19,9 @@ public class QuizActivity extends AppCompatActivity {
     Questions question;
     CountDownTimer timer;
     FirebaseDatabase database;
+    int timeValue =25;
     int correctAnswers = 0;
     TextView qc,tc,mq,o1,o2,o3,o4;
-    
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +48,20 @@ public class QuizActivity extends AppCompatActivity {
                 "Planet","Sun","Human","Ball","Planet"));
         questions.add(new Questions("What is Sun ?",
                 "Star","Planet","Human","ball","Star"));
+
+        timer = new CountDownTimer(25000,1000) {
+            @Override
+            public void onTick(long l) {
+                timeValue = timeValue-1;
+
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
 
     }
     public void setNextQuestion() {
