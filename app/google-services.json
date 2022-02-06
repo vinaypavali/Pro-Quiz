@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "920827733919",
+    "project_id": "proquiz-9d51b",
+    "storage_bucket": "proquiz-9d51b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920827733919:android:05fe081c060d8044983faa",
+        "android_client_info": {
+          "package_name": "com.quiz.proquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920827733919-5rfhu4f92g7t660jmmkhvueaqgevurho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.quiz.proquiz",
+            "certificate_hash": "1fa00715695ceb64f9c9aaa80660ebcbf426f37d"
+          }
+        },
+        {
+          "client_id": "920827733919-f730eiobut9b585sutfamdj39m4t544i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqLGhqVASZNFi8KWKMYl93Yd7VSikHn98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920827733919-f730eiobut9b585sutfamdj39m4t544i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
