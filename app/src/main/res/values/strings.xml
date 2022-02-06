@@ -2,6 +2,7 @@
     <string name="app_name">Pro Quiz</string>
 
     <string name="todo">T0DO</string>
+    <string name="change">Change Password</string>
 
     //sign_up strings.
     <string name="submit">SUBMIT</string>

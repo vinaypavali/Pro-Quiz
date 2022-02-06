@@ -51,24 +51,11 @@ public class QuizActivity extends AppCompatActivity {
         questions.add(new Questions("What is Sun ?",
                 "Star","Planet","Human","ball","Star"));
 
-
-
     }
     public void setNextQuestion() {
 
         if(index < questions.size()){
             Questions question = questions.get(index);
-            String que = question.question;
-            String op1 =question.option1;
-            String op2 =question.option2;
-            String op3=question.option3;
-            String op4=question.option4;
-
-            mq.setText(que);
-            o1.setText(op1);
-            o2.setText(op2);
-            o3.setText(op3);
-            o4.setText(op4);
 
         }
     }

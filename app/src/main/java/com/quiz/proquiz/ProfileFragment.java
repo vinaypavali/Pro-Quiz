@@ -40,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends AppCompatActivity {
 
-    TextView et1,et2,et3;
+    TextView et1,et2,et3,et4;
     CircleImageView iv;
     ImageView ivp;
     private FirebaseUser user;
@@ -63,6 +63,7 @@ public class ProfileFragment extends AppCompatActivity {
          et1=(TextView) findViewById(R.id.editText1);
          et2=(TextView) findViewById(R.id.editText2);
          et3=(TextView) findViewById(R.id.editText3);
+        et4=(TextView) findViewById(R.id.editText4);
         progressBar=(ProgressBar) findViewById(R.id.pb);
              Button bt =findViewById(R.id.out);
 
@@ -85,10 +86,13 @@ public class ProfileFragment extends AppCompatActivity {
                      String UserName= users.userName;
                      String mobile = users.mobile;
                      String gmail=users.gmail;
+                     String password=users.password;
+
 
                      et1.setText(UserName);
                      et2.setText(mobile);
                      et3.setText(gmail);
+                     et3.setText(password);
 
                      if(snapshot.hasChild("profilepic")){
                          String profilepic = snapshot.child("profilepic").getValue().toString();
