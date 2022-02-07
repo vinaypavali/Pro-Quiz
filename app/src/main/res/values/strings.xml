@@ -2,8 +2,10 @@
     <string name="app_name">Pro Quiz</string>
 
     <string name="todo">T0DO</string>
+    <string name="timeout">Opps Time Out...</string>
     <string name="change">Change Password</string>
     <string name="search">Search</string>
+    <string name="exit">Try Again</string>
     <string name="reset">Reset Password</string>
 
     //sign_up strings.
