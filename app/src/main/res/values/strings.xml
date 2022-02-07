@@ -4,6 +4,7 @@
     <string name="todo">T0DO</string>
     <string name="change">Change Password</string>
     <string name="search">Search</string>
+    <string name="reset">Reset Password</string>
 
     //sign_up strings.
     <string name="submit">SUBMIT</string>

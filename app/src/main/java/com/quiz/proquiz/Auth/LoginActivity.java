@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.quiz.proquiz.ForgotPassword;
 import com.quiz.proquiz.MainActivity;
 import com.quiz.proquiz.R;
 
@@ -28,10 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView lhead;
     TextView lforgot;
 
-   private FirebaseAuth mauth;
+    private FirebaseAuth mauth;
     private ProgressBar progressBar;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +48,21 @@ public class LoginActivity extends AppCompatActivity {
 
         mauth = FirebaseAuth.getInstance();
 
+
+
         llogin.setOnClickListener(view -> {
            loginUser();
 
         });
+
+        lforgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
+
+            }
+        });
+
         lclick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

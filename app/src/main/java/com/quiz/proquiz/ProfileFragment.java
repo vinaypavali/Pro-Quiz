@@ -88,11 +88,10 @@ public class ProfileFragment extends AppCompatActivity {
                      String gmail=users.gmail;
                      String password=users.password;
 
-
                      et1.setText(UserName);
                      et2.setText(mobile);
                      et3.setText(gmail);
-                     et3.setText(password);
+                     et4.setText(password);
 
                      if(snapshot.hasChild("profilepic")){
                          String profilepic = snapshot.child("profilepic").getValue().toString();

@@ -18,8 +18,12 @@
         <activity android:name=".Auth.SignupActivity">
         </activity>
 
+
         <activity android:name=".QuizActivity"
             android:parentActivityName=".MainActivity">
+
+        </activity>
+        <activity android:name=".ForgotPassword">
 
         </activity>
 
