@@ -62,7 +62,7 @@ public class RankFragment extends AppCompatActivity {
         rc.setAdapter(adapter);
 
 
-       dbRef=FirebaseDatabase.getInstance().getReference("Users");
+        dbRef=FirebaseDatabase.getInstance().getReference("Users");
         dbRef.orderByChild("coins").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

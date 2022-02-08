@@ -6,7 +6,7 @@ public class Users {
     String password;
     String mobile;
     String profilepic;
-     long coins = 100;
+    long coins = 100;
 
     public Users(){
 
