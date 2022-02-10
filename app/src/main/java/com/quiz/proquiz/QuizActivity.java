@@ -13,7 +13,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.quiz.proquiz.Auth.LoginActivity;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ public class QuizActivity extends AppCompatActivity {
     TextView qc,tc,mq,o1,o2,o3,o4;
     Button quit,next;
     String selectedOptionByUser="";
+    FirebaseFirestore dbase;
     ArrayList<Questions> questionsArrayList;
 
 
@@ -36,6 +41,8 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         getSupportActionBar().hide();
+        questionsArrayList = new ArrayList<>();
+        dbase = FirebaseFirestore.getInstance();
 
          qc = (TextView) findViewById(R.id.questionCounter);
          tc = (TextView) findViewById(R.id.timer);
@@ -49,8 +56,11 @@ public class QuizActivity extends AppCompatActivity {
 
          quit = (Button) findViewById(R.id.quitBtn);
          next = (Button) findViewById(R.id.nextBtn);
+         String categoryId = getIntent().getStringExtra("categoryId");
+         Random random = new Random();
+        final int rand = random.nextInt(2);
 
-        questionsArrayList = new ArrayList<>();
+
 
         o1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,9 +131,42 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        getQuestions(questionsArrayList);
+        dbase.collection("categories").document(categoryId)
+                .collection("questions")
+                .whereGreaterThanOrEqualTo("currentPos",rand)
+                .orderBy("currentPos")
+                .limit(2).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(queryDocumentSnapshots.getDocuments().size()<2){
+
+                    dbase.collection("categories").document(categoryId)
+                            .collection("questions")
+                            .whereLessThanOrEqualTo("currentPos",rand)
+                            .orderBy("currentPos")
+                            .limit(2).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            for(DocumentSnapshot snapshot : queryDocumentSnapshots){
+                                Questions que = snapshot.toObject(Questions.class);
+                                questionsArrayList.add(que);
+                            }
+                            setNextQuestion();
+                        }
+                    });
+                }else{
+                    for(DocumentSnapshot snapshot : queryDocumentSnapshots){
+                        Questions que = snapshot.toObject(Questions.class);
+                        questionsArrayList.add(que);
+                    }
+                    setNextQuestion();
+                }
+
+            }
+        });
+
         resetTimer();
-        setNextQuestion();
+
 
     }
 
@@ -185,14 +228,6 @@ public class QuizActivity extends AppCompatActivity {
         o4.setBackgroundResource(R.drawable.border);
     }
 
-    private void getQuestions(ArrayList<Questions> questionsArrayList) {
-
-        questionsArrayList.add(new Questions("What is earth ?",
-                "Planet","Sun","Human","Ball","Planet",""));
-        questionsArrayList.add(new Questions("What is Sun ?",
-                "Star","Planet","Human","ball","Star",""));
-
-    }
 
     private void gameWon(){
         Intent intent = new Intent(QuizActivity.this, ResultActivity.class);

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.quiz.proquiz.QuizActivity;
 import com.quiz.proquiz.R;
 import com.quiz.proquiz.ResultActivity;
@@ -42,12 +43,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         CategoryModel categoryModel =categoryModels.get(position);
         holder.textView.setText(categoryModel.getCategoryName());
-        holder.imageView.setImageResource(categoryModel.getCategoryImage());
+        Glide.with(context)
+                .load(categoryModel.getCategoryImage())
+                .into(holder.imageView);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context,QuizActivity.class);
-                i.putExtra("categoryName",categoryModel.getCategoryName());
+                i.putExtra("categoryId",categoryModel.getCategoryId());
                 context.startActivity(i);
 
             }

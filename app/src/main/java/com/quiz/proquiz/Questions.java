@@ -2,7 +2,7 @@ package com.quiz.proquiz;
 
 public class Questions {
 
-     String question;
+    String question;
     String option1;
     String option2;
     String option3;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.quiz.proquiz.Adapters.CategoryAdapter;
 import com.quiz.proquiz.Adapters.CategoryModel;
 import com.quiz.proquiz.Auth.LoginActivity;
@@ -25,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private GridLayoutManager gridLayoutManager;
     private  ArrayList<CategoryModel> cat;
     private RecyclerView.Adapter adapter;
+    FirebaseFirestore database;
 
 
     @Override
@@ -34,9 +41,30 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         BottomNavigationView bnv =findViewById(R.id.bottomBar);
         mauth = FirebaseAuth.getInstance();
+        database = FirebaseFirestore.getInstance();
+        recyclerView = findViewById(R.id.categoryList);
 
-        getData();
-        getRecycler();
+        cat = new ArrayList<>();
+        adapter = new CategoryAdapter(this,cat);
+        database.collection("categories")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        cat.clear();
+                        for(DocumentSnapshot snapshot : value.getDocuments()){
+                            CategoryModel model = snapshot.toObject(CategoryModel.class);
+                            model.setCategoryId(snapshot.getId());
+                            cat.add(model);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+        gridLayoutManager = new GridLayoutManager(this,2);
+        gridLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(adapter);
+
 
         bnv.setSelectedItemId(R.id.home);
 
@@ -72,33 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void getData(){
-        cat = new ArrayList<>();
 
-        cat.add(new CategoryModel("C",R.drawable.cpro));
-        cat.add(new CategoryModel("C++",R.drawable.cplus));
-        cat.add(new CategoryModel("Java",R.drawable.java));
-        cat.add(new CategoryModel("Python",R.drawable.python));
-        cat.add(new CategoryModel("HTML",R.drawable.html));
-        cat.add(new CategoryModel("CSS",R.drawable.css));
-        cat.add(new CategoryModel("MySQL",R.drawable.mysql));
-        cat.add(new CategoryModel("Aptitude",R.drawable.math));
-
-    }
-
-    public void getRecycler()
-    {
-        recyclerView = findViewById(R.id.categoryList);
-
-        gridLayoutManager = new GridLayoutManager(this,2);
-        gridLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(gridLayoutManager);
-
-         adapter = new CategoryAdapter(MainActivity.this,cat);
-         recyclerView.setAdapter(adapter);
-         adapter.notifyDataSetChanged();
-
-    }
     public void onStart() {
         super.onStart();
         FirebaseUser user = mauth.getCurrentUser();
