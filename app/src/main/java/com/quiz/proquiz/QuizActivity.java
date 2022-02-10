@@ -2,6 +2,7 @@ package com.quiz.proquiz;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -58,7 +59,7 @@ public class QuizActivity extends AppCompatActivity {
          next = (Button) findViewById(R.id.nextBtn);
          String categoryId = getIntent().getStringExtra("categoryId");
          Random random = new Random();
-        final int rand = random.nextInt(2);
+        final int rand = random.nextInt(12);
 
 
 
@@ -135,27 +136,27 @@ public class QuizActivity extends AppCompatActivity {
                 .collection("questions")
                 .whereGreaterThanOrEqualTo("currentPos",rand)
                 .orderBy("currentPos")
-                .limit(2).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .limit(5).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if(queryDocumentSnapshots.getDocuments().size()<2){
+                if (queryDocumentSnapshots.getDocuments().size() < 5) {
 
                     dbase.collection("categories").document(categoryId)
                             .collection("questions")
-                            .whereLessThanOrEqualTo("currentPos",rand)
+                            .whereLessThanOrEqualTo("currentPos", rand)
                             .orderBy("currentPos")
-                            .limit(2).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            .limit(5).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            for(DocumentSnapshot snapshot : queryDocumentSnapshots){
+                            for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
                                 Questions que = snapshot.toObject(Questions.class);
                                 questionsArrayList.add(que);
                             }
                             setNextQuestion();
                         }
                     });
-                }else{
-                    for(DocumentSnapshot snapshot : queryDocumentSnapshots){
+                } else {
+                    for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
                         Questions que = snapshot.toObject(Questions.class);
                         questionsArrayList.add(que);
                     }
@@ -191,12 +192,16 @@ public class QuizActivity extends AppCompatActivity {
 
         if(o1.getText().toString().equals(getAnswer)){
             o1.setBackgroundResource(R.drawable.option_green);
+
         }else  if(o2.getText().toString().equals(getAnswer)){
             o2.setBackgroundResource(R.drawable.option_green);
+
         }else  if(o3.getText().toString().equals(getAnswer)){
             o3.setBackgroundResource(R.drawable.option_green);
+
         }else  if(o4.getText().toString().equals(getAnswer)){
             o4.setBackgroundResource(R.drawable.option_green);
+
         }
     }
 

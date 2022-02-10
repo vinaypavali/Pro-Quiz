@@ -10,6 +10,9 @@ public class Questions {
     String answer;
     String userSelectedAnswer;
 
+    public Questions() {
+    }
+
     public Questions(String question, String option1, String option2, String option3, String option4, String answer,String userSelectedAnswer) {
         this.question = question;
         this.option1 = option1;
@@ -19,6 +22,8 @@ public class Questions {
         this.answer = answer;
         this.userSelectedAnswer = userSelectedAnswer;
     }
+
+
 
     public String getQuestion() {
         return question;
