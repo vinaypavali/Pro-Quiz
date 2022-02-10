@@ -136,16 +136,8 @@ public class QuizActivity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-                Dialog dialog=new Dialog(QuizActivity.this);
-                dialog.setContentView(R.layout.time_out);
-                dialog.findViewById(R.id.tryBtn).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(QuizActivity.this, MainActivity.class));
+                startActivity(new Intent(QuizActivity.this, MainActivity.class));
 
-                    }
-                });
-                dialog.show();
             }
         }.start();
 
