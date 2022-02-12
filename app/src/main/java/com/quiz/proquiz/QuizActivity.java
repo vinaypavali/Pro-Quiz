@@ -168,7 +168,6 @@ public class QuizActivity extends AppCompatActivity {
 
         resetTimer();
 
-
     }
 
     private void resetTimer() {
