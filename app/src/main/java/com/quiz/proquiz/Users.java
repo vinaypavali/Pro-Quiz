@@ -1,7 +1,8 @@
 package com.quiz.proquiz;
 
 public class Users {
-     String userName;
+
+    String userName;
     String gmail;
     String password;
     String mobile;
