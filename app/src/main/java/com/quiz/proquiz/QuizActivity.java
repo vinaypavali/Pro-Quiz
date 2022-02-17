@@ -118,6 +118,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(QuizActivity.this, MainActivity.class));
+                finish();
             }
         });
 
@@ -180,6 +181,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 startActivity(new Intent(QuizActivity.this, MainActivity.class));
+                finish();
 
             }
         }.start();

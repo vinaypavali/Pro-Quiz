@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 switch(item.getItemId()) {
                     case R.id.home:
 
+
                         return true;
                     case R.id.rank:
                         startActivity(new Intent(getApplicationContext(), RankFragment.class));
