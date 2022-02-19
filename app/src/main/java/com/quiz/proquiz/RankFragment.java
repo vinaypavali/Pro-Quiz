@@ -95,6 +95,7 @@ public class RankFragment extends AppCompatActivity {
                         finish();
                         return true;
                     case R.id.rank:
+                        finish();
 
                         return true;
 

@@ -95,10 +95,9 @@ public class ProfileFragment extends AppCompatActivity {
                      if(snapshot.hasChild("profilepic")){
                          String profilepic = snapshot.child("profilepic").getValue().toString();
                          Picasso.get().load(profilepic).into(iv);
+                         progressBar.setVisibility(View.GONE);
                      }
 
-
-                     progressBar.setVisibility(View.GONE);
                  }
              }
 
@@ -144,6 +143,7 @@ public class ProfileFragment extends AppCompatActivity {
                         return true;
 
                     case R.id.profile:
+                        finish();
 
                         return true;
 

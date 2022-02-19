@@ -86,6 +86,7 @@ public class WalletFragment extends AppCompatActivity {
                         return true;
 
                     case R.id.wallet:
+                        finish();
 
                         return true;
 
