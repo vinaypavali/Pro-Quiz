@@ -95,10 +95,10 @@ public class ProfileFragment extends AppCompatActivity {
                      if(snapshot.hasChild("profilepic")){
                          String profilepic = snapshot.child("profilepic").getValue().toString();
                          Picasso.get().load(profilepic).into(iv);
-                         progressBar.setVisibility(View.GONE);
                      }
 
                  }
+                 progressBar.setVisibility(View.GONE);
              }
 
              @Override
@@ -180,15 +180,21 @@ public class ProfileFragment extends AppCompatActivity {
                                         db.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                                                 .child("profilepic").setValue(uri.toString());
 
+
                                         Toast.makeText(ProfileFragment.this,"Uploaded",Toast.LENGTH_SHORT).show();
 
-
                                     }
+
+
                                 });
 
+
                             }
+
+
                         });
                     }
+
 
                 }
             });
