@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,14 +41,17 @@ public class RankFragment extends AppCompatActivity {
             LinearLayoutManager manager;
     private FirebaseStorage storage;
     private FirebaseDatabase db;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_rank);
         BottomNavigationView bnv =findViewById(R.id.bottomBar);
         RecyclerView rc = (RecyclerView) findViewById(R.id.rankView);
+        progressBar=(ProgressBar) findViewById(R.id.pb2);
         db = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
+        progressBar.setVisibility(View.VISIBLE);
 
 
         rc.setHasFixedSize(true);
@@ -69,6 +73,7 @@ public class RankFragment extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Users users1 = dataSnapshot.getValue(Users.class);
                     users.add(users1);
+                    progressBar.setVisibility(View.GONE);
                 }
                 adapter.notifyDataSetChanged();
 
@@ -76,6 +81,7 @@ public class RankFragment extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                progressBar.setVisibility(View.GONE);
 
             }
         });

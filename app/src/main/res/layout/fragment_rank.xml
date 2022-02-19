@@ -11,6 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/row_leaderboards" />
+    <ProgressBar
+        android:id="@+id/pb2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="266dp"
+        android:layout_marginStart="166dp"
+        android:visibility="visible"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomBar"
