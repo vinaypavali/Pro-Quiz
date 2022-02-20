@@ -122,14 +122,10 @@ public class QuizActivity extends AppCompatActivity {
                     setNextQuestion();
                     reset();
 
-
-
-
                 }
 
             }
         });
-
 
 
 
@@ -180,10 +176,9 @@ public class QuizActivity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-
                 timer.cancel();
-                startActivity(new Intent(QuizActivity.this, MainActivity.class));
-                finish();
+                onBackPressed();
+
             }
         }.start();
 
