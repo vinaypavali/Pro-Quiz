@@ -32,7 +32,6 @@ public class QuizActivity extends AppCompatActivity {
     FirebaseDatabase database;
     int currentPos=0, correctAnswers = 0,timeValue =30,wrongCount=0;
     TextView qc,tc,mq,o1,o2,o3,o4;
-    Button next;
     String selectedOptionByUser="";
     FirebaseFirestore dbase;
     ArrayList<Questions> questionsArrayList;
@@ -55,8 +54,6 @@ public class QuizActivity extends AppCompatActivity {
           o3 = (TextView) findViewById(R.id.option_3);
           o4 = (TextView) findViewById(R.id.option_4);
 
-
-         next = (Button) findViewById(R.id.nextBtn);
          String categoryId = getIntent().getStringExtra("categoryId");
          Random random = new Random();
         final int rand = random.nextInt(12);
