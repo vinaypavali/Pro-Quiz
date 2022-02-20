@@ -102,7 +102,7 @@ public class RankFragment extends AppCompatActivity {
                         return true;
                     case R.id.rank:
 
-                        finish();
+
                         return true;
 
                     case R.id.wallet:

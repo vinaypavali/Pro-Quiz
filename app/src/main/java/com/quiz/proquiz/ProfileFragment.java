@@ -144,7 +144,7 @@ public class ProfileFragment extends AppCompatActivity {
 
                     case R.id.profile:
 
-                        finish();
+
                         return true;
 
                 }
