@@ -143,8 +143,8 @@ public class ProfileFragment extends AppCompatActivity {
                         return true;
 
                     case R.id.profile:
-                        finish();
 
+                        finish();
                         return true;
 
                 }
@@ -199,6 +199,10 @@ public class ProfileFragment extends AppCompatActivity {
                 }
             });
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
 
 

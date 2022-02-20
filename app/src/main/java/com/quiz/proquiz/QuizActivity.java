@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -31,11 +32,10 @@ public class QuizActivity extends AppCompatActivity {
     FirebaseDatabase database;
     int currentPos=0, correctAnswers = 0,timeValue =30,wrongCount=0;
     TextView qc,tc,mq,o1,o2,o3,o4;
-    Button quit,next;
+    Button next;
     String selectedOptionByUser="";
     FirebaseFirestore dbase;
     ArrayList<Questions> questionsArrayList;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class QuizActivity extends AppCompatActivity {
           o3 = (TextView) findViewById(R.id.option_3);
           o4 = (TextView) findViewById(R.id.option_4);
 
-         quit = (Button) findViewById(R.id.quitBtn);
+
          next = (Button) findViewById(R.id.nextBtn);
          String categoryId = getIntent().getStringExtra("categoryId");
          Random random = new Random();
@@ -72,6 +72,10 @@ public class QuizActivity extends AppCompatActivity {
                     revelAnswer();
                     questionsArrayList.get(currentPos).setUserSelectedAnswer(selectedOptionByUser);
 
+                    currentPos++;
+                    setNextQuestion();
+                    reset();
+
                 }
 
             }
@@ -84,6 +88,10 @@ public class QuizActivity extends AppCompatActivity {
                     o2.setBackgroundResource(R.drawable.option_red);
                     revelAnswer();
                     questionsArrayList.get(currentPos).setUserSelectedAnswer(selectedOptionByUser);
+                    currentPos++;
+                    setNextQuestion();
+                    reset();
+
                 }
 
             }
@@ -96,6 +104,10 @@ public class QuizActivity extends AppCompatActivity {
                     o3.setBackgroundResource(R.drawable.option_red);
                     revelAnswer();
                     questionsArrayList.get(currentPos).setUserSelectedAnswer(selectedOptionByUser);
+                    currentPos++;
+                    setNextQuestion();
+                    reset();
+
                 }
 
             }
@@ -109,29 +121,20 @@ public class QuizActivity extends AppCompatActivity {
                     revelAnswer();
                     questionsArrayList.get(currentPos).setUserSelectedAnswer(selectedOptionByUser);
 
-                }
-
-            }
-        });
-
-        quit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(QuizActivity.this, MainActivity.class));
-                finish();
-            }
-        });
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reset();
-                if(currentPos <= questionsArrayList.size()) {
                     currentPos++;
                     setNextQuestion();
+                    reset();
+
+
+
+
                 }
+
             }
         });
+
+
+
 
         dbase.collection("categories").document(categoryId)
                 .collection("questions")
@@ -180,9 +183,10 @@ public class QuizActivity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
+
+                timer.cancel();
                 startActivity(new Intent(QuizActivity.this, MainActivity.class));
                 finish();
-
             }
         }.start();
 
@@ -209,12 +213,14 @@ public class QuizActivity extends AppCompatActivity {
     void setNextQuestion() {
         if(timer != null)
             timer.cancel();
-        resetTimer();
+
+
         timer.start();
 
         if(currentPos<questionsArrayList.size()){
             selectedOptionByUser="";
             reset();
+
             qc.setText(String.format("%d/%d",(currentPos+1),questionsArrayList.size()));
             mq.setText(questionsArrayList.get(currentPos).getQuestion());
             o1.setText(questionsArrayList.get(currentPos).getOption1());
@@ -235,7 +241,8 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
-    private void gameWon(){
+      void gameWon(){
+        timer.cancel();
         Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
         intent.putExtra("correct", getCorrectAnswers());
         intent.putExtra("total", questionsArrayList.size());
@@ -244,7 +251,7 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
-    private int getCorrectAnswers(){
+     int getCorrectAnswers(){
         for(int i=0;i<questionsArrayList.size();i++){
             final String getUserSelectedAnswer = questionsArrayList.get(i).getUserSelectedAnswer();
             final String getAnswer = questionsArrayList.get(i).getAnswer();
@@ -255,5 +262,6 @@ public class QuizActivity extends AppCompatActivity {
         }
         return correctAnswers;
     }
+
 
 }

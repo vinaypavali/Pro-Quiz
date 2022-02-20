@@ -86,8 +86,8 @@ public class WalletFragment extends AppCompatActivity {
                         return true;
 
                     case R.id.wallet:
-                        finish();
 
+                        finish();
                         return true;
 
                     case R.id.profile:
@@ -104,5 +104,8 @@ public class WalletFragment extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

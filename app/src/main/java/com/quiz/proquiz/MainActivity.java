@@ -2,6 +2,7 @@ package com.quiz.proquiz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -67,13 +68,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         bnv.setSelectedItemId(R.id.home);
-
+        Log.d("quit clicked","coming back to Main Activity ");
         bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case R.id.home:
                         finish();
+
                         return true;
                     case R.id.rank:
                         startActivity(new Intent(getApplicationContext(), RankFragment.class));
@@ -110,4 +112,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

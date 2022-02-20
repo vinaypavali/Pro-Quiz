@@ -101,8 +101,8 @@ public class RankFragment extends AppCompatActivity {
                         finish();
                         return true;
                     case R.id.rank:
-                        finish();
 
+                        finish();
                         return true;
 
                     case R.id.wallet:
@@ -125,5 +125,8 @@ public class RankFragment extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
