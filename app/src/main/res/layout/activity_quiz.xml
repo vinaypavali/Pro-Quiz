@@ -67,7 +67,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="@string/who_is_the_father_of_android"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/view5"
@@ -82,7 +81,6 @@
         android:padding="15dp"
         android:background="@drawable/border"
         android:textColor="@color/white"
-        android:text="@string/textview_1"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/view5"
         app:layout_constraintStart_toStartOf="@+id/view5"
@@ -95,7 +93,6 @@
         android:layout_marginTop="20dp"
         android:padding="15dp"
         android:background="@drawable/border"
-        android:text="@string/textview_1"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/option_1"
@@ -109,7 +106,6 @@
         android:layout_marginTop="20dp"
         android:padding="15dp"
         android:background="@drawable/border"
-        android:text="@string/textview_1"
         android:textStyle="bold"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/option_2"
@@ -123,12 +119,10 @@
         android:textColor="@color/white"
         android:padding="15dp"
         android:background="@drawable/border"
-        android:text="@string/textview_1"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/option_3"
         app:layout_constraintStart_toStartOf="@+id/option_3"
-        app:layout_constraintTop_toBottomOf="@+id/option_3"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/option_3" />
 
 
 

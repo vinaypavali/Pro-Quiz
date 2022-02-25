@@ -53,7 +53,6 @@ public class SignupActivity  extends AppCompatActivity {
 
         mauth= FirebaseAuth.getInstance();
 
-
         rsubmit.setOnClickListener(view -> {
             createUser();
 
@@ -70,7 +69,6 @@ public class SignupActivity  extends AppCompatActivity {
         String phone = rphone.getText().toString();
         String email = remail.getText().toString();
         String password = rpass.getText().toString();
-
 
 
         if(TextUtils.isEmpty(name)){
